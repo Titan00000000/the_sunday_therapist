@@ -16,6 +16,24 @@ st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬"
 # --- CUSTOM CSS FOR BRANDING & TYPOGRAPHY ---
 st.markdown("""
     <style>
+    /* Force the main container to prevent horizontal scrolling */
+        html, body, [data-testid="stAppViewContainer"] {
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+        }
+
+        /* Adjust Streamlit's inner chat input padding to keep the send icon visible */
+        [data-testid="stChatInput"] {
+            max-width: 100% !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Ensure the footer area doesn't spill over the mobile viewport boundary */
+        footer {
+            max-width: 100vw !important;
+        }
+    
     /* 1. Force hide the default large Streamlit headers */
     h1, [data-testid="stHeader"] {
         display: none !important;
