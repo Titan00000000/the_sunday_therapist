@@ -13,17 +13,17 @@ load_dotenv()
 # --- STREAMLIT PAGE SETUP ---
 st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬")
 
-# --- CUSTOM CSS FOR BRANDING, TYPOGRAPHY & FIXED LEFT CLOSE BUTTON ---
+# --- CUSTOM CSS, BRANDING & BULLETPROOF BOTTOM-LEFT CLOSE BUTTON ---
 st.markdown("""
     <style>
-    /* 1. Force hide any standard large Streamlit titles or headers */
+    /* 1. Hide the default large Streamlit headers */
     h1, [data-testid="stHeader"] {
         display: none !important;
     }
     
-    /* 2. Custom Title styled exactly like body text, bolded and underlined */
+    /* 2. Custom Title styled like body text, bolded and underlined */
     .therapy-title {
-        font-size: 16px !important; /* Matches standard body text size */
+        font-size: 16px !important;
         font-weight: bold !important;
         text-decoration: underline !important;
         margin-top: 15px !important;
@@ -31,45 +31,44 @@ st.markdown("""
         color: #31333F !important;
     }
     
-    /* 3. Shift the entire chat input field to the right to make space on the left */
+    /* 3. Shift the input field to the right to make room on the left */
     [data-testid="stChatInput"] {
-        margin-left: 85px !important;
+        margin-left: 95px !important;
     }
     
-    /* 4. Pin the Close Button to the Bottom-Left, aligning with the input field */
-    .custom-close-btn {
+    /* 4. Positioning for our custom HTML Close Button */
+    .custom-close-container {
         position: fixed;
-        bottom: 30px; /* Vertically aligns center-left of the chat input box */
-        left: 15px;   /* Places it to the left of the input field */
+        bottom: 24px; /* Vertically aligns perfectly with the input box */
+        left: 15px;   /* Pins it securely to the left of the input box */
         z-index: 999999;
     }
     
-    .custom-close-btn button {
-        background-color: #3A574B !important; /* Your forest green */
+    /* 5. Styling for our custom Close Button */
+    .my-close-btn {
+        background-color: #3A574B !important; /* Your brand forest green */
         color: white !important;
         border-radius: 8px !important;
         border: none !important;
-        padding: 8px 12px !important;
-        font-size: 0.85rem !important;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        transition: background-color 0.2s ease;
     }
     
-    .custom-close-btn button:hover {
+    .my-close-btn:hover {
         background-color: #2e443b !important;
     }
     </style>
+    
+    <!-- 6. Inject the Custom HTML Close Button directly into the page -->
+    <div class="custom-close-container">
+        <button class="my-close-btn" onclick="window.parent.postMessage('minimize_chat', '*')">✕ Close</button>
+    </div>
 """, unsafe_allow_html=True)
-
-# --- PINNED CLOSE BUTTON (BOTTOM-LEFT) ---
-st.markdown('<div class="custom-close-btn">', unsafe_allow_html=True)
-if st.button("✕ Close", key="fixed_close_action"):
-    st.components.v1.html("""
-        <script>
-            window.parent.postMessage("minimize_chat", "*");
-        </script>
-    """, height=0)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # --- NEW SMALL BRANDED TITLE ---
 st.markdown('<p class="therapy-title">The Sunday Therapist Chatbot</p>', unsafe_allow_html=True)
