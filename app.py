@@ -27,7 +27,7 @@ st.markdown("""
         background-color: #2e443b !important;
     }
     </style>
-""", unsafe_style=True)
+""", unsafe_allow_html=True)
 
 # Layout for Title and a native Minimise Action
 col1, col2 = st.columns([4, 1])
