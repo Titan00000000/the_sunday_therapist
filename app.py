@@ -57,7 +57,7 @@ st.markdown("""
     
     /* 6. Shift the input field container to the right to make room on the left */
     [data-testid="stChatInput"] {
-        margin-left: 115px !important; /* Increased from 95px to create a visible gap */
+        margin-left: 105px !important; /* Increased from 95px to create a visible gap */
     }
     
     /* 7. Position container to sit alongside the input field at the bottom */
