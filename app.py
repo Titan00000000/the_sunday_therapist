@@ -40,7 +40,7 @@ st.markdown("""
     
     /* 4. Custom Title styled exactly like body text, bolded and underlined */
     .therapy-title {
-        font-size: 15px !important;
+        font-size: 16px !important;
         font-weight: bold !important;
         text-decoration: underline !important;
         margin-top: 0px !important;
@@ -63,7 +63,7 @@ st.markdown("""
     /* 7. Position container to sit alongside the input field at the bottom */
     .custom-close-container {
         position: fixed;
-        bottom: 24px; /* Perfectly aligns with Streamlit's chat input baseline */
+        bottom: 30px; /* Perfectly aligns with Streamlit's chat input baseline */
         left: 20px;
         z-index: 999999;
     }
