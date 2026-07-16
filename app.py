@@ -202,7 +202,7 @@ with chat_container:
     if not st.session_state.chat_session_history:
         with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):  # <--- Fixed here!
             st.markdown(
-                "Hi. How can I help  \n\n"
+                "Hi. How can I help?  \n\n"
                 "**Top 3 questions**"
             )
             
