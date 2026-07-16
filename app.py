@@ -226,7 +226,8 @@ with chat_container:
     # Loop through and display conversation if it exists
     for message in st.session_state.chat_session_history:
         role = "user" if isinstance(message, HumanMessage) else "assistant"
-        with st.chat_message(role):
+        avatar = USER_AVATAR if role == "user" else ASSISTANT_AVATAR
+        with st.chat_message(role, avatar=avatar):
             st.markdown(message.content)
 
 # --- USER INPUT ---
@@ -234,10 +235,10 @@ if user_input := st.chat_input("How can I help you today?"):
     st.session_state.chat_session_history.append(HumanMessage(content=user_input))
     
     with chat_container:
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar=USER_AVATAR):
             st.markdown(user_input)
             
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):
             with st.spinner("Thinking..."):
                 reply = interact_with_bot(user_input)
                 st.markdown(reply)
