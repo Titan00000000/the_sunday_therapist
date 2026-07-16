@@ -203,16 +203,14 @@ with chat_container:
         with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):  # <--- Fixed here!
             st.markdown(
                 "Hi. How can I help  \n\n"
-                "**Top 5 questions**"
+                "**Top 3 questions**"
             )
             
-            # Setup 5 clickable buttons
+            # Setup 3 clickable buttons
             options = [
                 "What treatments do you offer?",
                 "What are your prices?",
-                "Do I need to undress for massage?",
                 "How do I book an appointment?",
-                "Do you offer gift vouchers?"
             ]
             
             # Display buttons. If any button is clicked, it behaves like typing it in!
