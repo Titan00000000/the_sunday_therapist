@@ -13,7 +13,7 @@ load_dotenv()
 # --- STREAMLIT PAGE SETUP ---
 st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬")
 
-# --- CUSTOM CSS FOR BRANDING, TYPOGRAPHY & PRECISE ALIGNMENT ---
+# --- CUSTOM CSS FOR BRANDING & TYPOGRAPHY ---
 st.markdown("""
     <style>
     /* 1. Force hide the default large Streamlit headers */
@@ -40,7 +40,7 @@ st.markdown("""
     
     /* 4. Custom Title styled exactly like body text, bolded and underlined */
     .therapy-title {
-        font-size: 16px !important;
+        font-size: 15px !important;
         font-weight: bold !important;
         text-decoration: underline !important;
         margin-top: 0px !important;
@@ -54,46 +54,7 @@ st.markdown("""
         color: #555555 !important;
         margin-bottom: 15px !important;
     }
-    
-    /* 6. Shift the input field container to the right to make room on the left */
-    [data-testid="stChatInput"] {
-        margin-left: 105px !important; /* Increased from 95px to create a visible gap */
-    }
-    
-    /* 7. Position container to sit alongside the input field at the bottom */
-    .custom-close-container {
-        position: fixed;
-        bottom: 30px; /* Perfectly aligns with Streamlit's chat input baseline */
-        left: 20px;
-        z-index: 999999;
-    }
-    
-    /* 8. Make the close button perfectly match the height & structure of the chat input */
-    .my-close-btn {
-        background-color: #3A574B !important; /* Forest green */
-        color: white !important;
-        border-radius: 8px !important;       /* Clean match to the prompt container */
-        border: 1px solid transparent !important;
-        height: 53px !important;              /* Adjusted to 44px to perfectly match the chat input's height */
-        padding: 0px 16px !important;
-        font-size: 15px !important;
-        font-weight: bold !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-        transition: background-color 0.2s ease;
-    }
-    
-    .my-close-btn:hover {
-        background-color: #2e443b !important;
-    }
     </style>
-    
-    <div class="custom-close-container">
-        <button class="my-close-btn" onclick="window.parent.postMessage('minimize_chat', '*')">✕ Close</button>
-    </div>
 """, unsafe_allow_html=True)
 
 # --- BRANDED TITLE & SUBTEXT ---
@@ -236,7 +197,7 @@ with chat_container:
     if not st.session_state.chat_session_history:
         with st.chat_message("assistant"):
             st.markdown(
-                "Hi. How can I help you today?  \n\n"
+                "Hi. How can I help  \n\n"
                 "**Top 5 questions**"
             )
             
@@ -264,7 +225,7 @@ with chat_container:
             st.markdown(message.content)
 
 # --- USER INPUT ---
-if user_input := st.chat_input("How can I help?"):
+if user_input := st.chat_input("How can I help you today?"):
     st.session_state.chat_session_history.append(HumanMessage(content=user_input))
     
     with chat_container:
