@@ -64,7 +64,7 @@ st.markdown("""
     .custom-close-container {
         position: fixed;
         bottom: 30px; /* Perfectly aligns with Streamlit's chat input baseline */
-        left: 20px;
+        left: 10px;
         z-index: 999999;
     }
     
@@ -236,7 +236,7 @@ with chat_container:
     if not st.session_state.chat_session_history:
         with st.chat_message("assistant"):
             st.markdown(
-                "Hi. How can I help  \n\n"
+                "Hi. How can I help you today?  \n\n"
                 "**Top 5 questions**"
             )
             
@@ -264,7 +264,7 @@ with chat_container:
             st.markdown(message.content)
 
 # --- USER INPUT ---
-if user_input := st.chat_input("How can I help you today?"):
+if user_input := st.chat_input("How can I help?"):
     st.session_state.chat_session_history.append(HumanMessage(content=user_input))
     
     with chat_container:
