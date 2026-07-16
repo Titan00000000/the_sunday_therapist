@@ -61,6 +61,11 @@ st.markdown("""
 st.markdown('<p class="therapy-title">The Sunday Therapist Chatbot</p>', unsafe_allow_html=True)
 st.markdown('<p class="therapy-caption">Hello and welcome to the automated assistance chatbot for treatments, pricing, and inquiries.</p>', unsafe_allow_html=True)
 
+# --- DEFINE CUSTOM AVATARS (With Fallbacks) ---
+# If your images are uploaded to GitHub, Streamlit will load them. Otherwise, it defaults to friendly emojis.
+ASSISTANT_AVATAR = "logo.png" if os.path.exists("logo.png") else "🌿"
+USER_AVATAR = "customer_avatar.png" if os.path.exists("user_avatar.png") else "👤"
+
 # --- INITIALIZATION (Caching ensures this only runs once) ---
 @st.cache_resource
 def init_models_and_kb():
