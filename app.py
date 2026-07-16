@@ -200,7 +200,7 @@ chat_container = st.container()
 with chat_container:
     # If there is no chat history yet, provide the updated streamlined greeting
     if not st.session_state.chat_session_history:
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):  # <--- Fixed here!
             st.markdown(
                 "Hi. How can I help  \n\n"
                 "**Top 5 questions**"
