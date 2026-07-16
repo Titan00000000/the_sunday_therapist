@@ -74,7 +74,7 @@ st.markdown("""
         color: white !important;
         border-radius: 8px !important;       /* Clean match to the prompt container */
         border: 1px solid transparent !important;
-        height: 50px !important;              /* Adjusted to 44px to perfectly match the chat input's height */
+        height: 55px !important;              /* Adjusted to 44px to perfectly match the chat input's height */
         padding: 0px 16px !important;
         font-size: 15px !important;
         font-weight: bold !important;
