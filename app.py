@@ -13,32 +13,43 @@ load_dotenv()
 # --- STREAMLIT PAGE SETUP ---
 st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬")
 
-# --- CUSTOM CSS FOR MINIMISE BUTTON & STYLING ---
+# --- CUSTOM CSS FOR BRANDING, TYPOGRAPHY & FIXED LEFT CLOSE BUTTON ---
 st.markdown("""
     <style>
-    /* 1. Reset standard Streamlit Title to look like normal body text, bolded & underlined */
-    .therapy-title {
-        font-size: 1rem !important; /* Matches standard paragraph size */
-        font-weight: bold !important;
-        text-decoration: underline !important;
-        margin-bottom: 5px !important;
-        color: inherit !important;
+    /* 1. Force hide any standard large Streamlit titles or headers */
+    h1, [data-testid="stHeader"] {
+        display: none !important;
     }
     
-    /* 2. Style and Pin the Close Button to the Bottom-Right near the Input Field */
+    /* 2. Custom Title styled exactly like body text, bolded and underlined */
+    .therapy-title {
+        font-size: 16px !important; /* Matches standard body text size */
+        font-weight: bold !important;
+        text-decoration: underline !important;
+        margin-top: 15px !important;
+        margin-bottom: 5px !important;
+        color: #31333F !important;
+    }
+    
+    /* 3. Shift the entire chat input field to the right to make space on the left */
+    [data-testid="stChatInput"] {
+        margin-left: 85px !important;
+    }
+    
+    /* 4. Pin the Close Button to the Bottom-Left, aligning with the input field */
     .custom-close-btn {
         position: fixed;
-        bottom: 74px; /* Sits perfectly right above/next to the chat input block */
-        right: 15px;
+        bottom: 30px; /* Vertically aligns center-left of the chat input box */
+        left: 15px;   /* Places it to the left of the input field */
         z-index: 999999;
     }
     
     .custom-close-btn button {
-        background-color: #3A574B !important;
+        background-color: #3A574B !important; /* Your forest green */
         color: white !important;
         border-radius: 8px !important;
         border: none !important;
-        padding: 4px 10px !important;
+        padding: 8px 12px !important;
         font-size: 0.85rem !important;
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -50,19 +61,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Layout for Title and a native Minimise Action
-col1, col2 = st.columns([4, 1])
-with col1:
-    st.title("The Sunday Therapist Chatbot")
-with col2:
-    # Clicking this button sends a Javascript signal to IONOS to close the iframe window!
-    if st.button("✕ Close"):
-        st.components.v1.html("""
-            <script>
-                window.parent.postMessage("minimize_chat", "*");
-            </script>
-        """, height=0)
+# --- PINNED CLOSE BUTTON (BOTTOM-LEFT) ---
+st.markdown('<div class="custom-close-btn">', unsafe_allow_html=True)
+if st.button("✕ Close", key="fixed_close_action"):
+    st.components.v1.html("""
+        <script>
+            window.parent.postMessage("minimize_chat", "*");
+        </script>
+    """, height=0)
+st.markdown('</div>', unsafe_allow_html=True)
 
+# --- NEW SMALL BRANDED TITLE ---
+st.markdown('<p class="therapy-title">The Sunday Therapist Chatbot</p>', unsafe_allow_html=True)
 st.caption("Hello and welcome to the automated assistance chatbot for treatments, pricing, and inquiries.")
 
 # --- INITIALIZATION (Caching ensures this only runs once) ---
@@ -124,7 +134,7 @@ def check_guardrails(user_input: str) -> bool:
 def calculate_cosine_similarity(vec_a, vec_b):
     return np.dot(vec_a, vec_b) / (np.linalg.norm(vec_a) * np.linalg.norm(vec_b))
 
-def find_csv_match(user_prompt: str, threshold=0.65):
+def find_csv_match(user_prompt: str, threshold=0.75):
     if not faq_embeddings:
         return None, 0
     query_vector = embeddings.embed_query(user_prompt)
@@ -201,7 +211,7 @@ with chat_container:
     if not st.session_state.chat_session_history:
         with st.chat_message("assistant"):
             st.markdown(
-                "Hello! I am your Sunday Therapist Assistant. how can I help you find balance and relaxation today?  \n\n"
+                "Hello! I am your Sunday Therapist Assistant. How can I help you find balance and relaxation today?  \n\n"
                 "**Here are the top 5 questions clients frequently ask. Click any of them to get an instant answer:**"
             )
             
@@ -217,7 +227,6 @@ with chat_container:
             # Display buttons. If any button is clicked, it behaves like typing it in!
             for option in options:
                 if st.button(option, key=f"btn_{option}"):
-                    # Simulates user entering the option
                     st.session_state.chat_session_history.append(HumanMessage(content=option))
                     reply = interact_with_bot(option)
                     st.session_state.chat_session_history.append(AIMessage(content=str(reply)))
