@@ -16,14 +16,35 @@ st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬"
 # --- CUSTOM CSS FOR MINIMISE BUTTON & STYLING ---
 st.markdown("""
     <style>
-    /* Custom Minimize Button Style */
-    .stButton > button {
+    /* 1. Reset standard Streamlit Title to look like normal body text, bolded & underlined */
+    .therapy-title {
+        font-size: 1rem !important; /* Matches standard paragraph size */
+        font-weight: bold !important;
+        text-decoration: underline !important;
+        margin-bottom: 5px !important;
+        color: inherit !important;
+    }
+    
+    /* 2. Style and Pin the Close Button to the Bottom-Right near the Input Field */
+    .custom-close-btn {
+        position: fixed;
+        bottom: 74px; /* Sits perfectly right above/next to the chat input block */
+        right: 15px;
+        z-index: 999999;
+    }
+    
+    .custom-close-btn button {
         background-color: #3A574B !important;
         color: white !important;
         border-radius: 8px !important;
         border: none !important;
+        padding: 4px 10px !important;
+        font-size: 0.85rem !important;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .stButton > button:hover {
+    
+    .custom-close-btn button:hover {
         background-color: #2e443b !important;
     }
     </style>
