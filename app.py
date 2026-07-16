@@ -2,7 +2,6 @@ import csv
 import os
 import numpy as np
 import streamlit as st
-import streamlit.components.v1 as components
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -10,20 +9,6 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 # Load environment variables
 load_dotenv()
-
-# --- FORCE SCROLL TO TOP ON LOAD ---
-components.html(
-    """
-    <script>
-        // Target the parent Streamlit main window container and force it to the top
-        const mainContainer = window.parent.document.querySelector('.main');
-        if (mainContainer) {
-            mainContainer.scrollTop = 0;
-        }
-    </script>
-    """,
-    height=0,
-)
 
 # --- STREAMLIT PAGE SETUP ---
 st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬")
