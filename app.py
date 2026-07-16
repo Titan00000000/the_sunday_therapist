@@ -16,6 +16,25 @@ st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬"
 # --- CUSTOM CSS FOR BRANDING & TYPOGRAPHY ---
 st.markdown("""
     <style>
+    /* Use 'svh' to respect the space taken by the mobile keyboard */
+        [data-testid="stAppViewContainer"] {
+            height: 100svh !important;
+            overflow-y: auto !important;
+        }
+
+        /* Ensure the chat input stays pinned to the bottom of the visible area */
+        [data-testid="stChatInput"] {
+            position: fixed !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            padding-bottom: 20px !important; /* Extra padding for bottom bars */
+        }
+        
+        /* Ensure the main chat content doesn't get hidden behind the input */
+        [data-testid="stChatMessageContainer"] {
+            padding-bottom: 100px !important;
+        }
+    
     /* Force the main container to prevent horizontal scrolling */
         html, body, [data-testid="stAppViewContainer"] {
             max-width: 100vw !important;
