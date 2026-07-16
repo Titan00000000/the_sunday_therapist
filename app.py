@@ -13,7 +13,7 @@ load_dotenv()
 # --- STREAMLIT PAGE SETUP ---
 st.set_page_config(page_title="The Sunday Therapist Assistant", page_icon="💬")
 
-# --- CUSTOM CSS FOR PERFECT ALIGNMENT, BRANDING & SPACING ---
+# --- CUSTOM CSS FOR BRANDING, TYPOGRAPHY & PRECISE ALIGNMENT ---
 st.markdown("""
     <style>
     /* 1. Force hide the default large Streamlit headers */
@@ -21,10 +21,10 @@ st.markdown("""
         display: none !important;
     }
 
-    /* 2. Remove massive top margin/padding space from the main block */
+    /* 2. Remove all massive top margin/padding space from the main block */
     .block-container {
         padding-top: 10px !important;
-        padding-bottom: 95px !important; /* Leaves room for the bottom chat bar */
+        padding-bottom: 95px !important; /* Space for fixed bottom elements */
     }
     
     /* 3. Global font styling - Force uniform font sizes across the entire app */
@@ -38,7 +38,7 @@ st.markdown("""
         font-size: 15px !important;
     }
     
-    /* 4. Custom Title styled like body text, bolded and underlined */
+    /* 4. Custom Title styled exactly like body text, bolded and underlined */
     .therapy-title {
         font-size: 15px !important;
         font-weight: bold !important;
@@ -55,27 +55,27 @@ st.markdown("""
         margin-bottom: 15px !important;
     }
     
-    /* 6. Shift the input field container to the right to line up perfectly with the chat bubbles */
+    /* 6. Shift the input field container to the right to make room on the left */
     [data-testid="stChatInput"] {
-        margin-left: 75px !important;
+        margin-left: 115px !important; /* Increased from 95px to create a visible gap */
     }
     
     /* 7. Position container to sit alongside the input field at the bottom */
     .custom-close-container {
         position: fixed;
-        bottom: 24px; /* Matches the exact vertical baseline of stChatInput */
-        left: 15px;
+        bottom: 24px; /* Perfectly aligns with Streamlit's chat input baseline */
+        left: 20px;
         z-index: 999999;
     }
     
-    /* 8. Close Button matching the exact height & alignment of the text input */
+    /* 8. Make the close button perfectly match the height & structure of the chat input */
     .my-close-btn {
         background-color: #3A574B !important; /* Forest green */
         color: white !important;
         border-radius: 8px !important;       /* Clean match to the prompt container */
         border: 1px solid transparent !important;
-        height: 40px !important;              /* Matches Streamlit's text input inner height */
-        padding: 0px 12px !important;
+        height: 44px !important;              /* Adjusted to 44px to perfectly match the chat input's height */
+        padding: 0px 16px !important;
         font-size: 15px !important;
         font-weight: bold !important;
         cursor: pointer !important;
