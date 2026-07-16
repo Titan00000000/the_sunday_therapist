@@ -151,6 +151,7 @@ def fallback_rag_generation(user_message, history, web_context):
         "TONE & STYLE GUIDELINES:\n"
         "- Be warm, empathetic, and professional.\n"
         "- Keep your answer concise (under 150 words) and directly structured.\n"
+        "- Use UK English in your responses.\n"
         "- Use bullet points to lay out your recommendations clearly.\n"
         "Here is the authentic website text to use for your answer:\n"
         f"{web_context}"
