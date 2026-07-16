@@ -64,7 +64,7 @@ st.markdown("""
     .custom-close-container {
         position: fixed;
         bottom: 30px; /* Perfectly aligns with Streamlit's chat input baseline */
-        left: 10px;
+        left: 20px;
         z-index: 999999;
     }
     
