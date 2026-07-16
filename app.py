@@ -34,6 +34,28 @@ st.markdown("""
         [data-testid="stChatMessageContainer"] {
             padding-bottom: 100px !important;
         }
+        
+        /* Force the chat input to respect the viewport width */
+        [data-testid="stChatInput"] {
+            width: 95vw !important;         /* Slightly less than full width to avoid clipping */
+            margin: 0 auto !important;      /* Centers the input */
+            left: 2.5vw !important;         /* Offset to maintain centering */
+            right: 2.5vw !important;
+            position: fixed !important;
+            bottom: 10px !important;        /* Keeps it off the absolute bottom */
+        }
+
+        /* Ensure the main container doesn't overflow */
+        [data-testid="stAppViewContainer"] {
+            overflow-x: hidden !important;  /* Stops horizontal scrolling */
+            width: 100vw !important;
+        }
+
+        /* Remove potential padding that pushes elements off-screen */
+        div.stApp {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
     
     /* Force the main container to prevent horizontal scrolling */
         html, body, [data-testid="stAppViewContainer"] {
