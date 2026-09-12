@@ -1,0 +1,14 @@
+name: Keep Streamlit Alive
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"  # Runs every 4 hours
+  workflow_dispatch:        # Allows manual testing
+
+jobs:
+  ping-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App Endpoint
+        run: |
+          curl -s -o /dev/null -w "%{http_code}\n" https://thesundaytherapistassistant.streamlit.app//
